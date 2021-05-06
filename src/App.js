@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import MovieCard from "./components/MovieCard";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import MovieCard from "./components/MovieCard";
+import AddFavourites from "./components/AddFavourites";
 import API from "./utils/API";
 
 const App = () => {
@@ -8,6 +10,7 @@ const App = () => {
   const [error, setError] = useState("");
   const [totalResults, setTotalResults] = useState("");
   const [resultList, setResultList] = useState([]);
+  const [favourites, setFavourites] = useState([]);
 
   const searchMoviesByName = (query) => {
     API.getSearchByName(query)
@@ -43,9 +46,14 @@ const App = () => {
     setSearchRequest(value);
   };
 
+  const addFavouriteMovie = (movie) => {
+    const newFavouriteList = [...favourites, movie];
+    setFavourites(newFavouriteList);
+  };
+
   return (
     <>
-      <div className="container">
+      <div className="container-fluid main-container">
         <form autoComplete="off" onSubmit={search}>
           <label>Movie Title</label>
           <input
@@ -62,13 +70,21 @@ const App = () => {
           {error && <p>invalid entry</p>}
           <button type="submit">Submit</button>
         </form>
-      </div>
-      {totalResults && <p>Total Results: {totalResults}</p>}
 
-      <div className="movie-card-wrapper">
-        {resultList.length > 0
-          ? resultList.map((el, i) => <MovieCard key={i} movieID={el} />)
-          : "error here"}
+        {totalResults && <p>Total Results: {totalResults}</p>}
+
+        <div className="row">
+          {resultList.length > 0
+            ? resultList.map((el, i) => (
+                <MovieCard
+                  key={i}
+                  movieID={el}
+                  handleFavouritesClick={addFavouriteMovie}
+                  favouriteComponent={AddFavourites}
+                />
+              ))
+            : "error here"}
+        </div>
       </div>
     </>
   );

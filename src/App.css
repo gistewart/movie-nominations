@@ -1,6 +1,11 @@
-body {
+/* body {
   max-width: 800px;
   margin: 0 auto;
+} */
+
+.main-container > .row {
+  overflow-x: auto;
+  flex-wrap: nowrap;
 }
 
 input {
@@ -13,13 +18,13 @@ input {
 button {
   text-transform: uppercase;
   margin-top: 30px;
-  width: 100%;
+  width: 50%;
   padding: 10px 0px;
   letter-spacing: 10px;
 }
 
 label {
-  line-height: 2;
+  line-height: 1.5;
   text-align: left;
   display: block;
   margin-bottom: 10px;
@@ -32,13 +37,55 @@ p {
   color: red;
 }
 
+.image-container {
+  position: relative;
+  transition: transform 0.2s;
+  max-height: 260px;
+  max-width: 180px;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  object-fit: cover;
+  min-height: 260px;
+  min-width: 180px;
+}
+
 .movie-card-wrapper {
-  width: 800px;
-  background: #cdd4ce;
-  height: 100%;
-  display: flex;
-  flex-flow: row wrap;
+  /* width: 800px; */
+  /* background: #cdd4ce; */
+  /* height: 100%; */
+  /* display: flex;
+  flex-flow: row wrap; */
+  /* padding: 5px; */
+  /* justify-content: space-around;
+  overflow: auto; */
+}
+
+.no-image-text {
+  position: absolute;
+  background: lightcyan;
+  width: 100%;
+  top: 0;
+  font-size: 12px;
   padding: 5px;
-  justify-content: space-around;
-  overflow: auto;
+  text-align: center;
+  font-weight: 600;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  bottom: 0;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
 }
