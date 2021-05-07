@@ -54,17 +54,6 @@ img {
   min-width: 180px;
 }
 
-.movie-card-wrapper {
-  /* width: 800px; */
-  /* background: #cdd4ce; */
-  /* height: 100%; */
-  /* display: flex;
-  flex-flow: row wrap; */
-  /* padding: 5px; */
-  /* justify-content: space-around;
-  overflow: auto; */
-}
-
 .no-image-text {
   position: absolute;
   background: lightcyan;
@@ -76,9 +65,9 @@ img {
   font-weight: 600;
 }
 
-.image-container:hover {
+/* .image-container:hover {
   cursor: pointer;
-}
+} */
 
 .image-container:hover .overlay {
   opacity: 1;
@@ -97,14 +86,22 @@ img {
   color: white;
 }
 
-.overlay-details {
-  font-size: 11px;
-}
-
-.overlay-details-element {
+.overlay-tags {
   background-color: white;
+  font-size: 11px;
   color: black;
   border-radius: 5%;
-  padding: 0 2px;
+  padding: 0 3px;
   margin: 0 5px 0 0;
+}
+
+.overlay-is-nominated {
+  color: grey;
+  font-weight: 400;
+  cursor: text;
+}
+
+.overlay-is-not-nominated {
+  font-weight: 800;
+  cursor: pointer;
 }

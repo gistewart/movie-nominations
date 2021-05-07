@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieInfo from "./components/MovieInfo";
-import AddFavourites from "./components/AddFavourites";
-import FavouritesList from "./components/FavouritesList";
 import MovieCard from "./components/MovieCard";
-// import RemoveFavourites from "./components/RemoveFavourites";
 import API from "./utils/API";
 
 const App = () => {
@@ -91,6 +88,7 @@ const App = () => {
                   movieID={el}
                   handleFavouritesClick={addFavouriteMovie}
                   favouriteComponent="Nominate +"
+                  favourites={favourites}
                 />
               ))
             : "error here"}

@@ -19,6 +19,7 @@ const MovieInfo = (props) => {
       movieInfo={movieInfo}
       handleFavouritesClick={props.handleFavouritesClick}
       favouriteComponent={props.favouriteComponent}
+      favourites={props.favourites}
     />
   );
 };

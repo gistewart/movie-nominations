@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import MovieTag from "./MovieTag";
 
@@ -6,7 +6,17 @@ export default function MovieCard({
   movieInfo,
   handleFavouritesClick,
   favouriteComponent,
+  favourites,
 }) {
+  const [isNominated, setIsNominated] = useState(false);
+
+  useEffect(() => {
+    if (favourites !== undefined) {
+      const match = favourites.some((el) => el.imdbID === movieInfo.imdbID);
+      setIsNominated(match);
+    }
+  }, [favourites]);
+
   return (
     <>
       <div className="image-container d-flex justify-content-start m-2">
@@ -26,16 +36,20 @@ export default function MovieCard({
           ""
         )}
         <div className="overlay align-items-center justify-content-center">
-          <div className="overlay-details">
+          <div>
             <MovieTag tag={movieInfo.Year} />
             <MovieTag tag={movieInfo.Genre} />
             <MovieTag tag={movieInfo.BoxOffice} />
           </div>
           <div
-            onClick={() => handleFavouritesClick(movieInfo)}
-            className="overlay-nominate"
+            onClick={
+              !isNominated ? () => handleFavouritesClick(movieInfo) : undefined
+            }
+            className={
+              isNominated ? "overlay-is-nominated" : "overlay-is-not-nominated"
+            }
           >
-            <strong>{favouriteComponent}</strong>
+            {favouriteComponent}
           </div>
         </div>
       </div>
