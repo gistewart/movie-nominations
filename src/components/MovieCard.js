@@ -3,7 +3,6 @@ import API from "../utils/API";
 import "../App.css";
 
 const MovieCard = (props) => {
-  console.log(props);
   const [movieInfo, setMovieInfo] = useState({});
 
   useEffect(() => {
@@ -34,11 +33,32 @@ const MovieCard = (props) => {
         ) : (
           ""
         )}
-        <div
-          onClick={() => props.handleFavouritesClick(props.movieID)}
-          className="overlay d-flex align-items-center justify-content-center"
-        >
-          <FavouriteComponent />
+        <div className="overlay align-items-center justify-content-center">
+          <div className="overlay-details">
+            {movieInfo.Year !== "N/A" ? (
+              <span className="overlay-details-element">{movieInfo.Year}</span>
+            ) : (
+              ""
+            )}
+            {movieInfo.Genre !== "N/A" ? (
+              <span className="overlay-details-element">{movieInfo.Genre}</span>
+            ) : (
+              ""
+            )}
+            {movieInfo.BoxOffice !== "N/A" ? (
+              <span className="overlay-details-element">
+                {movieInfo.BoxOffice}
+              </span>
+            ) : (
+              ""
+            )}
+          </div>
+          <div
+            onClick={() => props.handleFavouritesClick(movieInfo)}
+            className="overlay-nominate"
+          >
+            <FavouriteComponent />
+          </div>
         </div>
       </div>
     </>

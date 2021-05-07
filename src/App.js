@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieCard from "./components/MovieCard";
 import AddFavourites from "./components/AddFavourites";
+import FavouritesList from "./components/FavouritesList";
+// import RemoveFavourites from "./components/RemoveFavourites";
 import API from "./utils/API";
 
 const App = () => {
@@ -51,6 +53,13 @@ const App = () => {
     setFavourites(newFavouriteList);
   };
 
+  // const removeFavouriteMovie = (movie) => {
+  //   const newFavouriteList = favourites.filter(
+  //     (favourite) => favourite.imdbID !== movie.imdbID
+  //   );
+  //   setFavourites(newFavouriteList);
+  // };
+
   return (
     <>
       <div className="container-fluid main-container">
@@ -84,6 +93,13 @@ const App = () => {
                 />
               ))
             : "error here"}
+        </div>
+        <div classname="row">
+          <FavouritesList
+            movies={favourites}
+            handleFavouritesClick={addFavouriteMovie}
+            favouriteComponent={AddFavourites}
+          />
         </div>
       </div>
     </>
