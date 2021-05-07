@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from "react";
-import API from "../utils/API";
+import React from "react";
 import "../App.css";
+import MovieTag from "./MovieTag";
 
-const MovieCard = (props) => {
-  const [movieInfo, setMovieInfo] = useState({});
-
-  useEffect(() => {
-    API.getSearchByID(props.movieID)
-      .then((res) => res.data)
-      .then((res) => {
-        setMovieInfo(res);
-      });
-  }, [props.movieID]);
-
-  const FavouriteComponent = props.favouriteComponent;
-
+export default function MovieCard({
+  movieInfo,
+  handleFavouritesClick,
+  favouriteComponent,
+}) {
   return (
     <>
       <div className="image-container d-flex justify-content-start m-2">
@@ -35,34 +27,18 @@ const MovieCard = (props) => {
         )}
         <div className="overlay align-items-center justify-content-center">
           <div className="overlay-details">
-            {movieInfo.Year !== "N/A" ? (
-              <span className="overlay-details-element">{movieInfo.Year}</span>
-            ) : (
-              ""
-            )}
-            {movieInfo.Genre !== "N/A" ? (
-              <span className="overlay-details-element">{movieInfo.Genre}</span>
-            ) : (
-              ""
-            )}
-            {movieInfo.BoxOffice !== "N/A" ? (
-              <span className="overlay-details-element">
-                {movieInfo.BoxOffice}
-              </span>
-            ) : (
-              ""
-            )}
+            <MovieTag tag={movieInfo.Year} />
+            <MovieTag tag={movieInfo.Genre} />
+            <MovieTag tag={movieInfo.BoxOffice} />
           </div>
           <div
-            onClick={() => props.handleFavouritesClick(movieInfo)}
+            onClick={() => handleFavouritesClick(movieInfo)}
             className="overlay-nominate"
           >
-            <FavouriteComponent />
+            <strong>{favouriteComponent}</strong>
           </div>
         </div>
       </div>
     </>
   );
-};
-
-export default MovieCard;
+}

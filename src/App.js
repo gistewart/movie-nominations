@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import MovieCard from "./components/MovieCard";
+import MovieInfo from "./components/MovieInfo";
 import AddFavourites from "./components/AddFavourites";
 import FavouritesList from "./components/FavouritesList";
+import MovieCard from "./components/MovieCard";
 // import RemoveFavourites from "./components/RemoveFavourites";
 import API from "./utils/API";
 
@@ -53,12 +54,12 @@ const App = () => {
     setFavourites(newFavouriteList);
   };
 
-  // const removeFavouriteMovie = (movie) => {
-  //   const newFavouriteList = favourites.filter(
-  //     (favourite) => favourite.imdbID !== movie.imdbID
-  //   );
-  //   setFavourites(newFavouriteList);
-  // };
+  const removeFavouriteMovie = (movie) => {
+    const newFavouriteList = favourites.filter(
+      (favourite) => favourite.imdbID !== movie.imdbID
+    );
+    setFavourites(newFavouriteList);
+  };
 
   return (
     <>
@@ -85,21 +86,27 @@ const App = () => {
         <div className="row">
           {resultList.length > 0
             ? resultList.map((el, i) => (
-                <MovieCard
+                <MovieInfo
                   key={i}
                   movieID={el}
                   handleFavouritesClick={addFavouriteMovie}
-                  favouriteComponent={AddFavourites}
+                  favouriteComponent="Nominate +"
                 />
               ))
             : "error here"}
         </div>
-        <div classname="row">
-          <FavouritesList
-            movies={favourites}
-            handleFavouritesClick={addFavouriteMovie}
-            favouriteComponent={AddFavourites}
-          />
+
+        <div className="row">
+          {favourites.length > 0
+            ? favourites.map((el, i) => (
+                <MovieCard
+                  key={i}
+                  movieInfo={el}
+                  handleFavouritesClick={removeFavouriteMovie}
+                  favouriteComponent="Remove -"
+                />
+              ))
+            : ""}
         </div>
       </div>
     </>

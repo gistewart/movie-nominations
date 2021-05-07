@@ -1,7 +1,6 @@
 import React from "react";
 
 const FavouritesList = (props) => {
-  console.log(props);
   const FavouriteComponent = props.favouriteComponent;
 
   return (
