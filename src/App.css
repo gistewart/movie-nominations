@@ -8,6 +8,19 @@
   flex-wrap: nowrap;
 }
 
+.banner {
+  margin-bottom: 5px;
+}
+
+.heading {
+  background-color: grey;
+  text-align: center;
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  padding: 5px;
+}
+
 input {
   box-sizing: border-box;
   width: 400px;

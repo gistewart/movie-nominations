@@ -15,7 +15,7 @@ export default function MovieCard({
       const match = favourites.some((el) => el.imdbID === movieInfo.imdbID);
       setIsNominated(match);
     }
-  }, [favourites]);
+  }, [favourites, movieInfo]);
 
   return (
     <>

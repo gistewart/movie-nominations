@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieInfo from "./components/MovieInfo";
+import BannerComponent from "./components/Banner";
+import Heading from "./components/Heading";
 import MovieCard from "./components/MovieCard";
 import API from "./utils/API";
 
@@ -60,6 +62,8 @@ const App = () => {
 
   return (
     <>
+      <BannerComponent favourites={favourites} />
+      <Heading />
       <div className="container-fluid main-container">
         <form autoComplete="off" onSubmit={search}>
           <label>Movie Title</label>
