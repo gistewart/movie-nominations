@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import API from "./utils/API";
@@ -15,6 +15,19 @@ const App = () => {
   const [resultCount, setResultCount] = useState(0);
   const [resultList, setResultList] = useState([]);
   const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const movieFavourites = JSON.parse(
+      localStorage.getItem("movie-nominations")
+    );
+    if (movieFavourites) {
+      setFavourites(movieFavourites);
+    }
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("movie-nominations", JSON.stringify(items));
+  };
 
   const searchMoviesByName = (query) => {
     API.getSearchByName(query)
@@ -49,6 +62,7 @@ const App = () => {
   const addFavouriteMovie = (movie) => {
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   const removeFavouriteMovie = (movie) => {
@@ -56,6 +70,7 @@ const App = () => {
       (favourite) => favourite.imdbID !== movie.imdbID
     );
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   return (
