@@ -12,42 +12,26 @@
   margin-bottom: 5px;
 }
 
-.heading {
-  background-color: grey;
-  text-align: center;
-  color: white;
-  font-size: 28px;
-  font-weight: 800;
-  padding: 5px;
-}
-
 input {
   box-sizing: border-box;
   width: 400px;
-  padding: 10px 15px;
-  font-size: 14px;
+  padding: 5px 10px;
+  font-size: 16px;
 }
 
 button {
-  text-transform: uppercase;
-  margin-top: 30px;
-  width: 50%;
-  padding: 10px 0px;
-  letter-spacing: 10px;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 400;
 }
 
-label {
-  line-height: 1.5;
-  text-align: left;
-  display: block;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: 300;
-}
-
-p {
-  color: red;
+.results-header {
+  font-weight: 600;
+  background-color: lightgray;
+  line-height: 2em;
+  padding-left: 5px;
 }
 
 .image-container {

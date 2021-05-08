@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import MovieInfo from "./components/MovieInfo";
-import BannerComponent from "./components/Banner";
-import Heading from "./components/Heading";
-import MovieCard from "./components/MovieCard";
 import API from "./utils/API";
+import BannerComponent from "./components/Banner";
+import Header from "./components/Header";
+import Search from "./components/Search";
+import MovieInfo from "./components/MovieInfo";
+import MovieCard from "./components/MovieCard";
 
 const App = () => {
   const [searchRequest, setSearchRequest] = useState("");
   const [error, setError] = useState("");
-  const [totalResults, setTotalResults] = useState("");
+  const [resultCount, setResultCount] = useState(0);
   const [resultList, setResultList] = useState([]);
   const [favourites, setFavourites] = useState([]);
 
@@ -22,8 +23,12 @@ const App = () => {
           setResultList([]);
           return;
         }
-        const resultList = res.Search.map((el) => el.imdbID);
+        const resultList = res.Search.map((el) => el.imdbID).filter(
+          (v, i, a) => a.findIndex((t) => t === v) === i
+        );
         setResultList(resultList);
+        const totalResults = res.totalResults;
+        setResultCount(totalResults);
       });
   };
 
@@ -63,52 +68,56 @@ const App = () => {
   return (
     <>
       <BannerComponent favourites={favourites} />
-      <Heading />
-      <div className="container-fluid main-container">
-        <form autoComplete="off" onSubmit={search}>
-          <label>Movie Title</label>
-          <input
-            type="text"
-            name="searchRequest"
-            value={searchRequest}
-            placeholder="Search for a movie"
-            onChange={onChange}
-          />
-          <p style={{ fontSize: "12px" }}>
-            * Minimum of 3 case-insensitive characters required; search term can
-            be anywhere in movie title, and can be truncated.
-          </p>
-          {error && <p>invalid entry</p>}
-          <button type="submit">Submit</button>
-        </form>
+      <Header />
+      <div className="container mt-4">
+        <Search
+          searchRequest={searchRequest}
+          search={search}
+          onChange={onChange}
+        ></Search>
 
-        {totalResults && <p>Total Results: {totalResults}</p>}
+        <div className="container-fluid main-container mt-4">
+          {resultList.length > 0 ? (
+            <div className="row results-header mb-2">
+              Results: showing closest matches from a total of {resultCount}{" "}
+              results
+            </div>
+          ) : (
+            ""
+          )}
 
-        <div className="row">
-          {resultList.length > 0
-            ? resultList.map((el, i) => (
-                <MovieInfo
-                  key={i}
-                  movieID={el}
-                  handleFavouritesClick={addFavouriteMovie}
-                  favouriteComponent="Nominate +"
-                  favourites={favourites}
-                />
-              ))
-            : "error here"}
-        </div>
+          <div className="row">
+            {resultList.length > 0
+              ? resultList.map((el, i) => (
+                  <MovieInfo
+                    key={i}
+                    movieID={el}
+                    handleFavouritesClick={addFavouriteMovie}
+                    favouriteComponent="Nominate +"
+                    favourites={favourites}
+                  />
+                ))
+              : ""}
+          </div>
 
-        <div className="row">
-          {favourites.length > 0
-            ? favourites.map((el, i) => (
-                <MovieCard
-                  key={i}
-                  movieInfo={el}
-                  handleFavouritesClick={removeFavouriteMovie}
-                  favouriteComponent="Remove -"
-                />
-              ))
-            : ""}
+          {favourites.length > 0 ? (
+            <div className="row results-header mb-2">Nominated Movies</div>
+          ) : (
+            ""
+          )}
+
+          <div className="row">
+            {favourites.length > 0
+              ? favourites.map((el, i) => (
+                  <MovieCard
+                    key={i}
+                    movieInfo={el}
+                    handleFavouritesClick={removeFavouriteMovie}
+                    favouriteComponent="Remove -"
+                  />
+                ))
+              : ""}
+          </div>
         </div>
       </div>
     </>
