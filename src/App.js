@@ -10,8 +10,8 @@ import MovieCard from "./components/MovieCard";
 
 const App = () => {
   const [searchRequest, setSearchRequest] = useState("");
-  const [error, setError] = useState("");
-  const [notFoundError, setNotFoundError] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [resultCount, setResultCount] = useState(0);
   const [resultList, setResultList] = useState([]);
   const [favourites, setFavourites] = useState([]);
@@ -20,42 +20,25 @@ const App = () => {
     API.getSearchByName(query)
       .then((res) => res.data)
       .then((res) => {
-        if (!res.Search) {
-          setResultList([]);
-        }
         if (res.Response === "False") {
-          setNotFoundError("true");
+          setError(true);
+          setErrorMessage(res.Error);
+        } else {
+          setError(false);
+          setErrorMessage("");
+          const results = res.Search.map((el) => el.imdbID).filter(
+            (v, i, a) => a.findIndex((t) => t === v) === i
+          );
+          setResultList(results);
+          const totalResults = res.totalResults;
+          setResultCount(totalResults);
         }
-        if (res.Response === "True") {
-          setNotFoundError("false");
-        }
-        if (!res.Search || res.Response === "False") {
-          return;
-        }
-        const resultList = res.Search.map((el) => el.imdbID).filter(
-          (v, i, a) => a.findIndex((t) => t === v) === i
-        );
-        setResultList(resultList);
-        const totalResults = res.totalResults;
-        setResultCount(totalResults);
       });
-  };
-
-  const validate = (searchRequest) => {
-    const valid = searchRequest && searchRequest.length > 2;
-    if (!valid) {
-      setError(true);
-      setResultList("");
-    } else {
-      setError("");
-      searchMoviesByName(searchRequest);
-    }
-    return valid;
   };
 
   const search = (event) => {
     event.preventDefault();
-    validate(searchRequest);
+    searchMoviesByName(searchRequest);
   };
 
   const onChange = ({ target }) => {
@@ -85,8 +68,8 @@ const App = () => {
           search={search}
           onChange={onChange}
           error={error}
+          errorMessage={errorMessage}
           resultList={resultList}
-          notFoundError={notFoundError}
         ></Search>
 
         <div className="container-fluid main-container mt-4">

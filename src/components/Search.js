@@ -6,7 +6,7 @@ export default function Search({
   searchRequest,
   onChange,
   error,
-  notFoundError,
+  errorMessage,
 }) {
   return (
     <div>
@@ -23,11 +23,7 @@ export default function Search({
         </form>
         {error ? (
           <p className="error">
-            Error with search request: a minimum of 3 characters is required.
-          </p>
-        ) : notFoundError === "true" ? (
-          <p className="error">
-            Error with search request: no movies were found. Please try again.
+            Error with search request: {errorMessage} Please try again.
           </p>
         ) : (
           ""
