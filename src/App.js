@@ -11,6 +11,7 @@ import MovieCard from "./components/MovieCard";
 const App = () => {
   const [searchRequest, setSearchRequest] = useState("");
   const [error, setError] = useState("");
+  const [notFoundError, setNotFoundError] = useState("");
   const [resultCount, setResultCount] = useState(0);
   const [resultList, setResultList] = useState([]);
   const [favourites, setFavourites] = useState([]);
@@ -21,6 +22,14 @@ const App = () => {
       .then((res) => {
         if (!res.Search) {
           setResultList([]);
+        }
+        if (res.Response === "False") {
+          setNotFoundError("true");
+        }
+        if (res.Response === "True") {
+          setNotFoundError("false");
+        }
+        if (!res.Search || res.Response === "False") {
           return;
         }
         const resultList = res.Search.map((el) => el.imdbID).filter(
@@ -36,6 +45,7 @@ const App = () => {
     const valid = searchRequest && searchRequest.length > 2;
     if (!valid) {
       setError(true);
+      setResultList("");
     } else {
       setError("");
       searchMoviesByName(searchRequest);
@@ -67,13 +77,16 @@ const App = () => {
 
   return (
     <>
-      <BannerComponent favourites={favourites} />
       <Header />
+      <BannerComponent favourites={favourites} />
       <div className="container mt-4">
         <Search
           searchRequest={searchRequest}
           search={search}
           onChange={onChange}
+          error={error}
+          resultList={resultList}
+          notFoundError={notFoundError}
         ></Search>
 
         <div className="container-fluid main-container mt-4">

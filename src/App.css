@@ -6,10 +6,12 @@
 .main-container > .row {
   overflow-x: auto;
   flex-wrap: nowrap;
+  max-width: 990px;
+  margin: 0 auto;
 }
 
 .banner {
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 input {
@@ -25,6 +27,11 @@ button {
   background-color: #0d6efd;
   color: white;
   font-weight: 400;
+}
+
+.error {
+  font-size: 12px;
+  margin-top: 4px;
 }
 
 .results-header {

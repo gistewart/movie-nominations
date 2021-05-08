@@ -1,7 +1,13 @@
 import React from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 
-export default function Search({ search, searchRequest, onChange }) {
+export default function Search({
+  search,
+  searchRequest,
+  onChange,
+  error,
+  notFoundError,
+}) {
   return (
     <div>
       <Jumbotron className="text-center">
@@ -14,12 +20,18 @@ export default function Search({ search, searchRequest, onChange }) {
             onChange={onChange}
           />
           <button type="submit">Search</button>
-          {/* <p style={{ fontSize: "10px" }}>
-              * Min. of 3 case-insensitive characters required; search term can
-              be anywhere in movie title.
-            </p>
-            {error && <p>invalid entry</p>} */}
         </form>
+        {error ? (
+          <p className="error">
+            Error with search request: a minimum of 3 characters is required.
+          </p>
+        ) : notFoundError === "true" ? (
+          <p className="error">
+            Error with search request: no movies were found. Please try again.
+          </p>
+        ) : (
+          ""
+        )}
       </Jumbotron>
     </div>
   );
