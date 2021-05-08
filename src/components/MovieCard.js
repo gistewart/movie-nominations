@@ -4,18 +4,18 @@ import MovieTag from "./MovieTag";
 
 export default function MovieCard({
   movieInfo,
-  handleFavouritesClick,
-  favouriteComponent,
-  favourites,
+  handleNominatedClick,
+  selectText,
+  nominees,
 }) {
   const [isNominated, setIsNominated] = useState(false);
 
   useEffect(() => {
-    if (favourites !== undefined) {
-      const match = favourites.some((el) => el.imdbID === movieInfo.imdbID);
+    if (nominees !== undefined) {
+      const match = nominees.some((el) => el.imdbID === movieInfo.imdbID);
       setIsNominated(match);
     }
-  }, [favourites, movieInfo]);
+  }, [nominees, movieInfo]);
 
   return (
     <>
@@ -43,13 +43,13 @@ export default function MovieCard({
           </div>
           <div
             onClick={
-              !isNominated ? () => handleFavouritesClick(movieInfo) : undefined
+              !isNominated ? () => handleNominatedClick(movieInfo) : undefined
             }
             className={
               isNominated ? "overlay-is-nominated" : "overlay-is-not-nominated"
             }
           >
-            {favouriteComponent}
+            {selectText}
           </div>
         </div>
       </div>

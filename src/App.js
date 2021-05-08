@@ -14,14 +14,14 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [resultCount, setResultCount] = useState(0);
   const [resultList, setResultList] = useState([]);
-  const [favourites, setFavourites] = useState([]);
+  const [nominees, setNominees] = useState([]);
 
   useEffect(() => {
-    const movieFavourites = JSON.parse(
+    const movieNominations = JSON.parse(
       localStorage.getItem("movie-nominations")
     );
-    if (movieFavourites) {
-      setFavourites(movieFavourites);
+    if (movieNominations) {
+      setNominees(movieNominations);
     }
   }, []);
 
@@ -59,24 +59,24 @@ const App = () => {
     setSearchRequest(value);
   };
 
-  const addFavouriteMovie = (movie) => {
-    const newFavouriteList = [...favourites, movie];
-    setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
+  const addNominatedMovie = (movie) => {
+    const newNominatedList = [...nominees, movie];
+    setNominees(newNominatedList);
+    saveToLocalStorage(newNominatedList);
   };
 
-  const removeFavouriteMovie = (movie) => {
-    const newFavouriteList = favourites.filter(
-      (favourite) => favourite.imdbID !== movie.imdbID
+  const removeNominatedMovie = (movie) => {
+    const newNominatedList = nominees.filter(
+      (nominee) => nominee.imdbID !== movie.imdbID
     );
-    setFavourites(newFavouriteList);
-    saveToLocalStorage(newFavouriteList);
+    setNominees(newNominatedList);
+    saveToLocalStorage(newNominatedList);
   };
 
   return (
     <>
       <Header />
-      <BannerComponent favourites={favourites} />
+      <BannerComponent nominees={nominees} />
       <div className="container mt-4">
         <Search
           searchRequest={searchRequest}
@@ -103,28 +103,28 @@ const App = () => {
                   <MovieInfo
                     key={i}
                     movieID={el}
-                    handleFavouritesClick={addFavouriteMovie}
-                    favouriteComponent="Nominate +"
-                    favourites={favourites}
+                    handleNominatedClick={addNominatedMovie}
+                    selectText="Nominate +"
+                    nominees={nominees}
                   />
                 ))
               : ""}
           </div>
 
-          {favourites.length > 0 ? (
+          {nominees.length > 0 ? (
             <div className="row results-header mb-2">Nominated Movies</div>
           ) : (
             ""
           )}
 
           <div className="row">
-            {favourites.length > 0
-              ? favourites.map((el, i) => (
+            {nominees.length > 0
+              ? nominees.map((el, i) => (
                   <MovieCard
                     key={i}
                     movieInfo={el}
-                    handleFavouritesClick={removeFavouriteMovie}
-                    favouriteComponent="Remove -"
+                    handleNominatedClick={removeNominatedMovie}
+                    selectText="Remove -"
                   />
                 ))
               : ""}

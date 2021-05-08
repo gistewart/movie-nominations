@@ -3,23 +3,23 @@ import API from "../utils/API";
 import MovieCard from "./MovieCard";
 import "../App.css";
 
-const MovieInfo = (props) => {
+const MovieInfo = ({ movieID, handleNominatedClick, selectText, nominees }) => {
   const [movieInfo, setMovieInfo] = useState({});
 
   useEffect(() => {
-    API.getSearchByID(props.movieID)
+    API.getSearchByID(movieID)
       .then((res) => res.data)
       .then((res) => {
         setMovieInfo(res);
       });
-  }, [props.movieID]);
+  }, [movieID]);
 
   return (
     <MovieCard
       movieInfo={movieInfo}
-      handleFavouritesClick={props.handleFavouritesClick}
-      favouriteComponent={props.favouriteComponent}
-      favourites={props.favourites}
+      handleNominatedClick={handleNominatedClick}
+      selectText={selectText}
+      nominees={nominees}
     />
   );
 };

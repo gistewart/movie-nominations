@@ -24,7 +24,7 @@ input {
 button {
   box-sizing: border-box;
   padding: 5px 10px;
-  background-color: #0d6efd;
+  background-color: green;
   color: white;
   font-weight: 400;
 }
