@@ -23,7 +23,9 @@ export default function Search({
         </form>
         {error ? (
           <p className="error">
-            Sorry, error with search request: {errorMessage} Please try again.
+            Sorry, error with search request.{" "}
+            <span className="error-message">{errorMessage}</span> Please try
+            again.
           </p>
         ) : (
           ""

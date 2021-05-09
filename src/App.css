@@ -35,6 +35,10 @@ button {
   color: red;
 }
 
+.error-message {
+  background-color: yellow;
+}
+
 .results-header {
   font-weight: 600;
   background-color: lightgray;
@@ -69,10 +73,6 @@ img {
   text-align: center;
   font-weight: 600;
 }
-
-/* .image-container:hover {
-  cursor: pointer;
-} */
 
 .image-container:hover .overlay {
   opacity: 1;
