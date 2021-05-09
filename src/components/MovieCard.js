@@ -43,10 +43,22 @@ export default function MovieCard({
           </div>
           <div
             onClick={
-              !isNominated ? () => handleNominatedClick(movieInfo) : undefined
+              selectText === "Nominate +" &&
+              !isNominated &&
+              nominees !== undefined &&
+              nominees.length < 10
+                ? () => handleNominatedClick(movieInfo)
+                : selectText === "Remove -" &&
+                  nominees !== undefined &&
+                  nominees.length < 10
+                ? () => handleNominatedClick(movieInfo)
+                : undefined
             }
             className={
-              isNominated ? "overlay-is-nominated" : "overlay-is-not-nominated"
+              (selectText === "Nominate +" && isNominated) ||
+              (nominees !== undefined && nominees.length === 5)
+                ? "overlay-is-nominated"
+                : "overlay-is-not-nominated"
             }
           >
             {selectText}

@@ -97,7 +97,7 @@ const App = () => {
             ""
           )}
 
-          <div className="row">
+          <div className="row mb-3">
             {resultList.length > 0
               ? resultList.map((el, i) => (
                   <MovieInfo
@@ -125,6 +125,7 @@ const App = () => {
                     movieInfo={el}
                     handleNominatedClick={removeNominatedMovie}
                     selectText="Remove -"
+                    nominees={nominees}
                   />
                 ))
               : ""}

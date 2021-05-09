@@ -6,7 +6,10 @@ export default function BannerComponent({ nominees }) {
     <div className="row">
       {nominees.length === 5 ? (
         <div>
-          <Banner title="You have nominated 5 movies" visibleTime={3000} />
+          <Banner
+            title="Congratulations! You have nominated 5 movies - you're now finished! No further changes can be made."
+            visibleTime={3000}
+          />
         </div>
       ) : (
         ""
