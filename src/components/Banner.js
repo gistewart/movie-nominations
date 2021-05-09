@@ -9,6 +9,7 @@ export default function BannerComponent({ nominees }) {
           <Banner
             title="Congratulations! You have nominated 5 movies - you're now finished! No further changes can be made."
             visibleTime={3000}
+            css={{ marginBottom: "0" }}
           />
         </div>
       ) : (

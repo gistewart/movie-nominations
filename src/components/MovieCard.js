@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import MovieTag from "./MovieTag";
+import { motion } from "framer-motion";
 
 export default function MovieCard({
   movieInfo,

@@ -15,7 +15,7 @@ This app was built as part of a challenge from a potential employer, and it incl
 3. Updates to the search terms update the result list
 4. Movies in search results can be added and removed from the nomination list
 5. If a search result has already been nominated, its nomination button is disabled
-6. A banner is display when the user has 5 nominations
+6. A banner is displayed when the user has 5 nominations
 
 ## Additional Features
 

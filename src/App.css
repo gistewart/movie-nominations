@@ -1,17 +1,8 @@
-/* body {
-  max-width: 800px;
-  margin: 0 auto;
-} */
-
 .main-container > .row {
   overflow-x: auto;
   flex-wrap: nowrap;
   max-width: 990px;
   margin: 0 auto;
-}
-
-.banner {
-  margin-top: 5px;
 }
 
 input {
