@@ -40,7 +40,6 @@ button {
 
 .image-container {
   position: relative;
-  transition: transform 0.2s;
   max-height: 230px;
   max-width: 160px;
   padding: 0;
@@ -78,7 +77,7 @@ img {
   opacity: 0;
   bottom: 0;
   font-size: 14px;
-  padding: 8px;
+  padding: 5px 0;
   text-align: center;
   color: white;
 }
@@ -89,7 +88,7 @@ img {
   color: black;
   border-radius: 5%;
   padding: 0 3px;
-  margin: 0 5px 0 0;
+  margin: 0 2px;
 }
 
 .overlay-is-nominated {
@@ -101,4 +100,20 @@ img {
 .overlay-is-not-nominated {
   font-weight: 800;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 450px) {
+  input {
+    width: 225px;
+  }
+
+  .image-container {
+    max-height: 190px;
+    max-width: 130px;
+  }
+
+  img {
+    min-height: 190px;
+    min-width: 130px;
+  }
 }

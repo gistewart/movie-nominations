@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import MovieTag from "./MovieTag";
-import { motion } from "framer-motion";
 
 export default function MovieCard({
   movieInfo,
@@ -47,11 +46,11 @@ export default function MovieCard({
               selectText === "Nominate +" &&
               !isNominated &&
               nominees !== undefined &&
-              nominees.length < 10
+              nominees.length < 5
                 ? () => handleNominatedClick(movieInfo)
                 : selectText === "Remove -" &&
                   nominees !== undefined &&
-                  nominees.length < 10
+                  nominees.length < 5
                 ? () => handleNominatedClick(movieInfo)
                 : undefined
             }

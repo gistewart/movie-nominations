@@ -90,8 +90,7 @@ const App = () => {
         <div className="container-fluid main-container mt-4">
           {resultList.length > 0 ? (
             <div className="row results-header mb-2">
-              Results: showing closest matches from a total of {resultCount}{" "}
-              results
+              Results: best matches from {resultCount} results
             </div>
           ) : (
             ""
