@@ -21,15 +21,29 @@ This app was built as part of a challenge from a potential employer, and it incl
 
 In order to create a better user experience, the following features are also included:
 
-1. Any duplicate movies (using the imdbID property) are removed before the search results are shown
-2. Using the imdbID property, an additional search is made for each movie in the search results to retrieve more information
-3. Poster...
+1. The search can handle truncated search terms
+2. If the search returns an error message, it is displayed
+3. If the search is successful, the app shows the total number of results to give the user an idea of the precision of their search
+4. Any duplicate movies (using the imdbID property) are removed before the search results are shown
+5. Using the imdbID property, an additional search is made for each returned movie to retrieve more information
+6. The movie poster image forms the basis of each movie, but if no image is returned, a placeholder image and the movie's name are displayed instead
+7. To help the user identify the correct movie to nominate, additional information appears when hovering over a movie (or when clicking a movie on a mobile device):
+   - the movie's year of release
+   - the movie's genre, if returned (if a movie has more than 1 genre, the first one is listed)
+   - the movie's box office, if returned (formatted in $M or $K for space purposes)
+8. Nominated movies are saved to local storage
 
 ## Design Considerations
 
+The most important design consideration was the layout of the movie 'cards' from the search results and when a movie is nominated. A horizontal scrolling option was selected to keep the nominated movies just below the search results and because it is a layout that will hopefully feel familiar to most users.
+
 ## How to get started
 
+Enter a search term, then to nominate a movie, hover over it, and click `Nominate +`. To remove a nominated movie, hover and click `Remove -`.
+
 ## Project maintenance and contributions
+
+The app is maintained by Graeme Stewart and was built as part of a challenge from a potential employer.
 
 ## Deployed link
 

@@ -75,8 +75,8 @@ const App = () => {
 
   return (
     <>
-      <Header />
       <BannerComponent nominees={nominees} />
+      <Header />
       <div className="container mt-4">
         <Search
           searchRequest={searchRequest}
